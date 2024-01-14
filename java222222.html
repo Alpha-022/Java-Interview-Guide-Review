@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Java Interview Guide</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css" id="theme">
+	<link rel="stylesheet" href="css/reveal-override.css" />
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+
+
+			<!-- Slides are separated by three dashes (quick 'n dirty regular expression) -->
+			<section data-markdown data-separator="---">
+
+				<script type="text/template">
+
+
+<!-- .slide: class="center" -->
+# Wrapper Class
+
+---
+## What are Wrapper Classes?
+
+<!-- .slide: class="image-right image-fifty one" -->
+![](./images\java222\Wrapper-Class-Interview-Questions.png)
+- In Java, wrapper classes provide object methods for **primitive types**.
+- All primitive wrapper classes are in the **`java.lang`** package and are **immutable**.
+- **Primitive Wrapper Classes:**
+	- Boolean, Byte, Character, Double, Float, Integer, Long, Short
+- **Primitive Types:**
+	- boolean, byte, char, double, float, int, long, short
+
+---
+## Why Wrapper Classes in Java?
+
+<!-- .slide: class="image-right image-five one30" -->
+- Wraps around a data type, giving it an object appearance.
+- **Reasons** for Wrapper Classes:
+	- **null Value:** Represents possible null values.
+	- **Collection Usage:** Needed when using collections.
+	- **Object-like Methods:** Support object-like creation from other types.
+- **Example:** 
+```
+Integer number2 = new Integer("55"); // String
+```
+
+---
+## What	are	the	different ways of creating Wrapper Class Instances?
+
+<!-- .slide: one" -->
+- There are two ways of creating Wrapper Class Instances: **Wrapper Class Constructor** , **valueOf Static Methods**
+- **Using a Wrapper Class Constructor**:
+
+```
+Integer number = new Integer(55);//int
+Integer number2 = new Integer("55");//String
+Float number3 = new Float(55.0);//double argument
+Float number4 = new Float(55.0f);//float argument
+Float number5 = new Float("55.0f");//String
+Character c1 = new Character('C');//Only char constructor
+//Character c2 = new Character(124);//COMPILER ERROR
+Boolean b = new Boolean(true);
+//"true" "True" "tRUe" - all String Values give True
+//Anything else gives false
+Boolean b1 = new Boolean("true");//value stored - true
+Boolean b2 = new Boolean("True");//value stored - true
+Boolean b3 = new Boolean("False");//value stored - false
+Boolean b4 = new Boolean("SomeString");//value stored - false
+```
+--- 
+
+## cont....
+<!-- .slide:  one30" -->
+- **Using valueOf Static Methods**:
+	- Provide another way of creating a Wrapper Object.
+
+```
+Integer hundred = Integer.valueOf("100");//100 is stored in variable
+
+Integer seven = Integer.valueOf("111", 2);//binary 111 is converted to 7
+```
+
+---
+<!-- .slide:  one" -->
+## What	are	differences	in the two ways of creating Wrapper Classes?
+- **Using Constructor:**
+- Always creates a new object.
+- **valueOf() Static Method:**
+	- May return a cached value within a range.
+	- **Example:** Cached values for long are between [-128 to 127].
+	- Prefer static valueOf() for potential memory savings.
+
+```java
+	public static Integer valueOf(int i) {
+		if (i >= IntegerCache.low && i <= IntegerCache.high)
+			return IntegerCache.cache[i + (-IntegerCache.low)];
+		return new Integer(i);
+	}
+```
+
+---
+## What	is Auto Boxing?
+<!-- .slide: class="one10" -->
+- Automatic conversion between primitive types and their corresponding object wrapper classes in Java.
+- For example, converting int to Integer, double to Double, etc.
+- The reverse conversion is termed as **unboxing**.
+- **Example 1:**
+```
+Integer nineC = 9;
+```
+- **Example 2:**
+
+```
+Integer ten = new Integer(10);
+ten++; //Allowed; Java handles the operation behind the scenes.
+```
+
+---
+## What	are	the	advantages of Auto Boxing?
+<!-- .slide: class="one" -->
+
+- Auto Boxing helps **save memory** by reusing already created Wrapper objects.
+- Utilizes static valueOf methods for efficient object creation.
+- **Wrapper Object Comparison:**
+	- Wrapper classes created using new are not reused.
+
+```
+Integer nineA = new Integer(9);
+Integer nineB = new Integer(9);
+System.out.println(nineA == nineB); // false
+System.out.println(nineA.equals(nineB)); // true
+```
+- **Auto Boxing Object Reusability:**
+	- Wrapper objects created using auto boxing are the same.
+
+```
+Integer nineC = 9;
+Integer nineD = 9;
+System.out.println(nineC == nineD); // true
+System.out.println(nineC.equals(nineD)); // true
+```
+---
+## What	is Casting?
+
+<!-- .slide: class="one30" -->
+
+- Casting is used when we want to convert one data type to another. 
+- There are two types of Casting:
+	- **Implicit Casting**
+	- **Explicit Casting**
+
+
+---
+## What	is Implicit	Casting?
+<!-- .slide: class=" one30" -->
+- Implicit Casting is **performed by the compiler**.
+- It involves automatic widening conversions, such as storing smaller values in larger variable types.
+- **Example:**
+
+```
+int value =	100;
+long number = value; //Implicit	Casting
+float f = 100; //Implicit Casting	
+```
+---
+
+## What	is Explicit Casting?
+<!-- .slide: class="one10" -->
+
+- Explicit Casting is **performed through code**.
+- Involves narrowing conversions, such as storing larger values into smaller variable types.
+```
+long number1 = 25678;
+int number2 = (int)number1; // Explicit Casting
+// int x = 35.35; // COMPILER ERROR
+int x = (int)35.35; // Explicit Casting
+```
+- **Note :** Explicit casting may cause truncation if the value exceeds the size of the variable.
+```
+int bigValue = 280;
+byte small = (byte)bigValue;
+System.out.println(small); // Output: 24. Only 8 bits remain.
+```
+---
+<!-- .slide: class="center" -->
+
+# Thank You!
+
+
+
+
+
+						</script>
+			</section>
+
+		</div>
+
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+
+	<script>
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions
+			width: 1200,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.04,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 2.0,
+
+			controls: false,
+			progress: false,
+			history: true,
+			center: false,
+			slideNumber: true,
+			fragments: false,
+			transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true }
+			]
+		});
+
+
+	</script>
+
+</body>
+
+</html>
